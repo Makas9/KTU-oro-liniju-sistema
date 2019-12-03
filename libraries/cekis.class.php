@@ -13,33 +13,22 @@ class cekis {
         return false;
     }
 
-    public function generateLuggagePrice($aukstis, $ilgis, $plotis, $svoris, $ypatybe) {
-        $kaina = 5;
+    public function generateLuggagePrice($aukstis, $ilgis, $plotis, $svoris, $sumaPerKg, $sumaPerCm, $koeficientas) {
+        $kaina = 0.99;
 
         $turis = $aukstis*$ilgis*$plotis;
 
         while($turis > 0){
-            $kaina += 5;
+            $kaina += ($sumaPerCm*1000);
             $turis -= 1000;
         }
 
         while($svoris > 0){
-            $kaina += 0.99;
+            $kaina += $sumaPerKg;
             $svoris -= 1;
         }
 
-        switch($ypatybe){
-            case "iprastas":
-                $multiply = 1;
-                break;
-            case "trapus":
-                $multiply = 1.4;
-                break;
-            default:
-                $multiply = 1;
-        }
-
-        return $kaina*$multiply;
+        return $kaina*$koeficientas;
     }
 
 }

@@ -43,11 +43,13 @@
         <div class="form-group">
             <label for="ypatybe">Ypatybė</label>
             <select class="form-control" id="ypatybe" name="ypatybe">
+                <option selected="true" disabled>Pasirinkite...</option>
                 <?php
 
                 foreach($ypatybe as $key => $row) {
+                    if($row["ypatybe"] == "sumaPerKg" || $row["ypatybe"] == "sumaPerCm") continue;
                     ?>
-                    <option value="<?php echo $row["id"]; ?>"><?php echo $row["ypatybe"]; ?></option>
+                    <option value="<?php echo $row["id"]; ?>"><?php echo $row["ypatybe"]; ?> (<?php echo number_format($row["koeficientas"], 2); ?>x)</option>
                     <?php
                 }
 
@@ -57,6 +59,7 @@
         <div class="form-group">
             <label for="lektuvas">Lėktuvas</label>
             <select class="form-control" id="lektuvas" name="lektuvas">
+                <option selected="true" disabled>Pasirinkite...</option>
                 <?php
 
                 foreach($lektuvas as $key => $row) {
@@ -71,6 +74,7 @@
         <div class="form-group">
             <label for="ypatybe">Keleivis</label>
             <select class="form-control" id="keleivis" name="keleivis">
+                <option selected="true" disabled>Pasirinkite...</option>
                 <?php
 
                 foreach($keleivis as $key => $row) {
@@ -83,5 +87,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Sukurti</button>
+        <div>Pridedama kaina per kilogramą: <?php echo $sumaPerKg; ?> EUR</div>
+        <div>Pridedama kaina per kubinį centimetrą: <?php echo $sumaPerCm; ?> EUR</div>
     </form>
 </div>
