@@ -12,6 +12,9 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php?module=patalpos&action=list">Patalpos</a>
       </li>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php?module=bagazas&action=index">Bagažas</a>
+        </li>
       <li class="nav-item">
         <a class="nav-link" href="index.php?module=login&action=log_out">Atsijungti</a>
       </li>
