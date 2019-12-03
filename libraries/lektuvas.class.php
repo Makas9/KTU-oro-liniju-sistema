@@ -11,4 +11,12 @@ class lektuvas {
         return $data;
     }
 
+    public function getLektuvasByID($lektuvas) {
+        $query = "  SELECT *
+                    FROM {$this->lektuvas_table} WHERE `id_lektuvas` = {$lektuvas}";
+        $data = mysql::select($query)[0];
+
+        return $data;
+    }
+
 }

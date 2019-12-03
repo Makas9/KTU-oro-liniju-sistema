@@ -23,43 +23,14 @@
     <?php } ?>
 
     <form style="width: 400px; margin: 0 auto;" action="index.php?module=<?php echo $module; ?>&action=<?php echo $action; ?>" method="POST">
-        <legend>Naujas bagažas:</legend>
-        <div class="form-group">
-            <label for="aukstis">Aukštis (cm)</label>
-            <input type="number" class="form-control" id="aukstis" name="aukstis" min="1" max="999">
-        </div>
-        <div class="form-group">
-            <label for="ilgis">Ilgis (cm)</label>
-            <input type="number" class="form-control" id="ilgis" name="ilgis" min="1" max="999">
-        </div>
-        <div class="form-group">
-            <label for="plotis">Plotis (cm)</label>
-            <input type="number" class="form-control" id="plotis" name="plotis" min="1" max="999">
-        </div>
-        <div class="form-group">
-            <label for="svoris">Svoris (kg)</label>
-            <input type="number" class="form-control" id="svoris" name="svoris" min="1" max="100">
-        </div>
-        <div class="form-group">
-            <label for="ypatybe">Ypatybė</label>
-            <select class="form-control" id="ypatybe" name="ypatybe">
-                <?php
-
-                foreach($ypatybe as $key => $row) {
-                    ?>
-                    <option value="<?php echo $row["id"]; ?>"><?php echo $row["ypatybe"]; ?></option>
-                    <?php
-                }
-
-                ?>
-            </select>
-        </div>
+        <legend>Paskirstyti bagažą lėktuvams:</legend>
         <div class="form-group">
             <label for="lektuvas">Lėktuvas</label>
             <select class="form-control" id="lektuvas" name="lektuvas">
+                <option selected="true" disabled>Pasirinkite...</option>
                 <?php
 
-                foreach($lektuvas as $key => $row) {
+                foreach($visiLektuvai as $key => $row) {
                     ?>
                     <option value="<?php echo $row["id_lektuvas"]; ?>"><?php echo $row["marke"]; ?> <?php echo $row["modelis"]; ?> (<?php echo $row["id_lektuvas"]; ?>)</option>
                     <?php
@@ -69,19 +40,44 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="ypatybe">Keleivis</label>
-            <select class="form-control" id="keleivis" name="keleivis">
+            <label for="bagazas">Bagažas</label>
+            <select class="form-control" id="bagazas" name="bagazas">
+                <option selected="true" disabled>Pasirinkite...</option>
                 <?php
 
-                foreach($keleivis as $key => $row) {
+                foreach($nepakrautiLagaminai as $key => $row) {
                     ?>
-                    <option value="<?php echo $row["id_keleivis"]; ?>"><?php echo $row["vardas"]; ?> <?php echo $row["pavarde"]; ?> (<?php echo $row["id_keleivis"]; ?>)</option>
+                    <option value="<?php echo $row["id_bagazas"]; ?>"><?php echo $row["aukstis"]; ?>cm x <?php echo $row["ilgis"]; ?>cm x <?php echo $row["plotis"]; ?>cm, <?php echo $row["svoris"]; ?> kg (<?php echo $row["id_bagazas"]; ?>)</option>
                     <?php
                 }
 
                 ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Sukurti</button>
+        <button type="submit" class="btn btn-primary">Paskirstyti</button>
     </form>
+    <?php if(!empty($keleivioBagazas)){ ?>
+        <table class="table" style="width: 400px; margin: 10px auto;">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Bagažo numeris</th>
+                <th scope="col">Kuriame lėktuve</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+                foreach($keleivioBagazas as $key => $row) {
+                    ?>
+                    <tr>
+                        <th scope="row"><?php echo $row["id_bagazas"]; ?></th>
+                        <td><?php echo $row["lektuvo_marke"]; ?> <?php echo $row["lektuvo_modelis"]; ?></td>
+                    </tr>
+                    <?php
+                }
+            ?>
+            </tbody>
+        </table>
+    <?php
+    }
+    ?>
 </div>

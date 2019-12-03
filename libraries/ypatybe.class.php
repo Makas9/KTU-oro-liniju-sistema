@@ -11,4 +11,12 @@ class ypatybe {
         return $data;
     }
 
+    public function getYpatybeMultiplierByID($ypatybe) {
+        $query = "  SELECT `koeficientas`
+                    FROM {$this->ypatybe_table} WHERE `id` = {$ypatybe}";
+        $data = mysql::select($query)[0];
+
+        return $data;
+    }
+
 }

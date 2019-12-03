@@ -14,7 +14,16 @@ class darbuotojai {
 		
 		return false;
     }
-	
+
+    public function getIDByEmail($email) {
+        $query = "  SELECT id_darbuotojas
+                    FROM {$this->darbuotoju_table}
+                    WHERE e_pastas='{$email}' LIMIT 1";
+        $data = mysql::select($query)[0]["id_darbuotojas"];
+
+        return $data;
+    }
+
 	public function canRegister($email, $password) {
         $query = "  SELECT *
                     FROM {$this->darbuotoju_table}
