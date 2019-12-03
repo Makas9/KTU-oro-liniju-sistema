@@ -55,7 +55,13 @@
                     ?>
                     <tr>
                         <th scope="row"><?php echo $row["id_bagazas"]; ?></th>
-                        <td><?php echo $row["lektuvo_marke"]; ?> <?php echo $row["lektuvo_modelis"]; ?></td>
+                        <td><?php
+                            if(!empty($row["lektuvo_marke"])){
+                                echo $row["lektuvo_marke"]; ?> <?php echo $row["lektuvo_modelis"];
+                            } else {
+                                echo "Laukia pakrovimo į lėktuvą";
+                            }
+                            ?></td>
                     </tr>
                     <?php
                 }
