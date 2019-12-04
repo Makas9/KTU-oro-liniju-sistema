@@ -46,4 +46,12 @@ class bagazas {
         return false;
     }
 
+    public function getLuggageByID($id) {
+        $query = "  SELECT *
+                    FROM {$this->bagazu_table} WHERE `id_bagazas` = {$id}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+
 }

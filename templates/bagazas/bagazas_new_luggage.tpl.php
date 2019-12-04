@@ -57,21 +57,6 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="lektuvas">Lėktuvas</label>
-            <select class="form-control" id="lektuvas" name="lektuvas">
-                <option selected="true" disabled>Pasirinkite...</option>
-                <?php
-
-                foreach($lektuvas as $key => $row) {
-                    ?>
-                    <option value="<?php echo $row["id_lektuvas"]; ?>"><?php echo $row["marke"]; ?> <?php echo $row["modelis"]; ?> (<?php echo $row["id_lektuvas"]; ?>)</option>
-                    <?php
-                }
-
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="ypatybe">Keleivis</label>
             <select class="form-control" id="keleivis" name="keleivis">
                 <option selected="true" disabled>Pasirinkite...</option>

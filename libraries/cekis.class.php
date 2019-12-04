@@ -31,4 +31,12 @@ class cekis {
         return $kaina*$koeficientas;
     }
 
+    public function getCekisByID($id) {
+        $query = "  SELECT *
+                    FROM {$this->cekis_table}
+                    WHERE id_cekis='{$id}' LIMIT 1";
+        $data = mysql::select($query);
+
+        return $data;
+    }
 }
