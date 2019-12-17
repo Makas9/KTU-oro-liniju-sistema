@@ -15,6 +15,9 @@
         <li class="nav-item">
             <a class="nav-link" href="index.php?module=bagazas&action=index">Bagažas</a>
         </li>
+		<li class="nav-item">
+            <a class="nav-link" href="index.php?module=marsrutai&action=index">Maršrutai</a>
+        </li>
 		 <li class="nav-item">
             <a class="nav-link" href="index.php?module=lektuvai&action=index">Lėktuvai</a>
         </li>

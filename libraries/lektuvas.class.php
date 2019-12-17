@@ -18,7 +18,7 @@ class lektuvas {
 
         return $data;
     }
-	public function newLektuvas($max_kuras, $kuras, $bagazo_talpa, $max_keleiviai, $modelis, $marke, $fk_remontas_id_remontas) {
+    public function newLektuvas($max_kuras, $kuras, $bagazo_talpa, $max_keleiviai, $modelis, $marke, $fk_remontas_id_remontas) {
         $query = "	INSERT INTO {$this->lektuvas_table} (max_kuras, kuras, bagazo_talpa, max_keleiviai, modelis, marke, fk_remontas_id_remontas)
 					VALUES ('{$max_kuras}', '{$kuras}', '{$bagazo_talpa}', '{$max_keleiviai}', '{$modelis}', '{$marke}', '{$fk_remontas_id_remontas}')";
         $data = mysql::query($query);

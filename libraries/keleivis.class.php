@@ -28,5 +28,15 @@ class keleivis {
 
         return $data;
     }
+    
+    public function newKeleivis($vardas, $pavarde, $ivykis) {           // ++
+        $query = "	INSERT INTO {$this->keleiviu_table} (vardas, pavarde, ivykis)
+					VALUES ('{$vardas}', '{$pavarde}', '{$ivykis}')";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
 
 }
