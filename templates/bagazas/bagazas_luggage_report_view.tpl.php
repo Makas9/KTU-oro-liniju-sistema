@@ -127,12 +127,14 @@
         <h5>Bagažo kelio duomenys:</h5>
         <?php
         if(!empty($lektuvas)){
-            ?>
-                Kelias
-            <?php
+        ?>
+        <?php
+            foreach($bagazoKelias as $key => $row) {
+                echo $row["isvykimo_vieta"]." -> ".$row["atvykimo_vieta"]." (pilotas: ".$row["pilotas"]."; skrydžio būsena: ".$row["busena"].")";
+            }
         } else {
             ?>
-            Bagažo kelio nėra galimybės nurodyti
+                Bagažo kelio nėra galimybės nurodyti
             <?php
         }
         ?>

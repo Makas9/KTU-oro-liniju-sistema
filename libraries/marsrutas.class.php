@@ -48,7 +48,14 @@ class marsrutas {
 
         return $data;
     }
-    
+
+    public function getMarsrutaiByAirplaneID($id) {              // ++
+        $query = "  SELECT *
+                    FROM {$this->marsrutu_table} WHERE `fk_lektuvas_id_lektuvas` = {$id}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
     
 
 }
