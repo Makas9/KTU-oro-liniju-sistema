@@ -3,8 +3,10 @@
 class marsrutas {
     private $marsrutu_table = 'marsrutas';
 
-    public function getMarsrutaiList() {                  // ++
-        $query = "  SELECT *
+    public function getMarsrutaiList() {
+        $query = "  SELECT
+						*,
+						CONCAT(isvykimo_vieta, ' - ', atvykimo_vieta) AS pavadinimas
                     FROM {$this->marsrutu_table}";
         $data = mysql::select($query);
 
@@ -72,6 +74,12 @@ class marsrutas {
         return false;
     }
 
+	public function getPlacesList() {
+		$query = "	SELECT marsrutas.isvykimo_vieta AS vieta FROM marsrutas
+					UNION
+					SELECT marsrutas.atvykimo_vieta FROM marsrutas";
+		return mysql::select($query);
+	}
     
 
 }
