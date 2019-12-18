@@ -12,9 +12,17 @@
 		<li class="nav-item">
 			<a class="nav-link" href="index.php?module=patalpos&action=list">Patalpos</a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="index.php?module=oro_uostai&action=list_actions">Oro uostai</a>
-		</li>
+		<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Oro uostai
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="index.php?module=oro_uostai&action=list_actions">Oro uostų sąrašas</a>
+          <a class="dropdown-item" href="index.php?module=oro_uostai&action=naujas">Sukurti naują oro uostą</a>
+          <a class="dropdown-item" href="index.php?module=oro_uostai&action=pokalbiu_kambarys">Pokalbių kambarys</a>
+          <a class="dropdown-item" href="index.php?module=oro_uostai&action=praejimo_kontrole">Praėjimo kontrolė</a>
+        </div>
+      </li>
         <li class="nav-item">
             <a class="nav-link" href="index.php?module=bagazas&action=index">Bagažas</a>
         </li>
