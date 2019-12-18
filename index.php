@@ -2,6 +2,7 @@
     include 'config.php';
     include 'utils/mysql.class.php';
     include 'utils/makeLink.class.php';
+    include 'utils/printer.class.php';
 
     session_start();
 	
