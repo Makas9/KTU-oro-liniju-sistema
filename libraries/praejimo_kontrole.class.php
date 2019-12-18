@@ -21,7 +21,7 @@ class praejimo_kontrole {
 	}
 
 	public function getByAirport($id) {
-		return $this->getAllEntries("WHERE oro_uostas.id_oro_uostas={$id}");
+		return $this->getAllEntries("WHERE daiktas.fk_oro_uostas={$id}");
 	}
 
 	public function insertNew($keleivis, $oroUostoId, $vartai) {

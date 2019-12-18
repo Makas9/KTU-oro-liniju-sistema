@@ -22,12 +22,12 @@ class orouostas {
 
 	public function updateAirport($id, $salis, $miestas, $pavadinimas, $koordinates) {
 		$query = "	UPDATE `oro_uostas`
-		SET
-			`salis` = '{$salis}',
-			`miestas` = '{$miestas}',
-			`pavadinimas` = '{$pavadinimas}',
-			`koordinates` = '{$koordinates}'
-			WHERE id_oro_uostas={$id}";
+					SET
+						`salis` = '{$salis}',
+						`miestas` = '{$miestas}',
+						`pavadinimas` = '{$pavadinimas}',
+						`koordinates` = '{$koordinates}'
+						WHERE id_oro_uostas={$id}";
 		mysql::query($query);
 	}
 
@@ -49,3 +49,5 @@ class orouostas {
     
 
 }
+
+?>

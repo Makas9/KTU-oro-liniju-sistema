@@ -2,7 +2,7 @@
 	<?php if ($_GET['action'] === 'naujas')
 			echo "<h3>Naujo oro uosto kūrimas</h3>";
 		else
-			echo "<h3>Oro uosto redagavimas";
+			echo "<h3>Oro uosto redagavimas</h3>";
 	?>
 	<br>
 
@@ -15,19 +15,19 @@
 	<div class="form-group">
 		<label for="salis">Šalis</label>
 		<input type="text" class="form-control" name="salis" required
-			<?php if (isset($data['pavadinimas'])) echo " value=\"{$data['salis']}\" " ?>
+			<?php if (isset($data['salis'])) echo " value=\"{$data['salis']}\" " ?>
 		>
 	</div>
 	<div class="form-group">
 		<label for="miestas">Miestas</label>
 		<input type="text" class="form-control" name="miestas" required
-			<?php if (isset($data['pavadinimas'])) echo " value=\"{$data['miestas']}\" " ?>
+			<?php if (isset($data['miestas'])) echo " value=\"{$data['miestas']}\" " ?>
 		>
 	</div>
 	<div class="form-group">
 		<label for="koordinates">Koordinatės</label>
 		<input type="text" class="form-control" name="koordinates" required
-			<?php if (isset($data['pavadinimas'])) echo " value=\"{$data['koordinates']}\" " ?>
+			<?php if (isset($data['koordinates'])) echo " value=\"{$data['koordinates']}\" " ?>
 		>
 	</div>
 	<button type="submit" class="btn btn-primary mb-2">Išsaugoti</button>

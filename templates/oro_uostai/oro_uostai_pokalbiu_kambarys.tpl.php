@@ -12,7 +12,7 @@
 <table class="table">
 	<thead class="thead-light">
 		<tr>
-			<th scope="col">#</th>
+			<!-- <th scope="col">#</th> -->
 			<th scope="col">Vardas</th>
 			<th scope="col">Laikas</th>
 			<th scope="col">Žinutė</th>
@@ -22,7 +22,7 @@
 		<?php 
 			foreach ($data as $row) {
 				echo "<tr>"
-					."<th scope=\"row\">{$row['id_pokalbiu_kambarys']}</th>"
+					// ."<th scope=\"row\">{$row['id_pokalbiu_kambarys']}</th>"
 					."<td>{$row['vardas']}</td>"
 					."<td>{$row['laikas']}</td>"
 					."<td>{$row['tekstas']}</td>"

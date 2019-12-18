@@ -1,6 +1,3 @@
-Nuomoti patalpas<br>
-Sudaryti tvarkarasti<br>
-Inventorizuoti daiktus<br>
 <h3>Oro uostų sąrašas</h3>
 <a href="index.php?module=oro_uostai&action=naujas">Sukurti naują oro uostą</a>
 <table class="table">

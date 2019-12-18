@@ -3,6 +3,14 @@
 class darbuotojai {
     private $darbuotoju_table = 'darbuotojas';
 
+	public function getAll() {
+		$query = "	SELECT
+						*,
+						CONCAT(vardas, ' ', pavarde) AS vardas_pavarde
+					FROM darbuotojas";
+		return mysql::select($query);
+	}
+
     public function isCorrectLogin($email, $password) {
         $query = "  SELECT slaptazodis
                     FROM {$this->darbuotoju_table}
