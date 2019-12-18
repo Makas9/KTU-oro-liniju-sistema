@@ -20,7 +20,7 @@
             include 'header.tpl.php';
         } ?>
 
-        <div id="pageContent" style="margin: 20px auto; width: 80%">
+        <div id="pageContent" style="margin: 50px auto; width: 80%">
             <?php
                 // įtraukiame veiksmų failą
                 if(file_exists($actionFile)) {
