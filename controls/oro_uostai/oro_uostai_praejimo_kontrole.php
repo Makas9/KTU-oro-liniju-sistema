@@ -14,7 +14,7 @@ if (isset($_GET['airport']))
 	$data = $praejimoKontrObj->getByAirport($_GET['airport']);
 else 
 	$data = $praejimoKontrObj->getAllEntries();
-
+	
 include "templates/oro_uostai/oro_uostai_praejimo_kontrole.tpl.php";
 
 ?>
