@@ -27,7 +27,7 @@
 		<?php
 			printer::navItem("bagazas", "index", "Bagažas");
 			printer::navItem("marsrutai", "index", "Maršrutai");
-			printer::navItem("marsrutai", "index", "Lėktuvai");
+			printer::navItem("lektuvai", "index", "Lėktuvai");
 			printer::navItem("login", "log_out", "Atsijungti");
 		?>
     </ul>
