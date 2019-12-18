@@ -56,6 +56,22 @@ class marsrutas {
 
         return $data;
     }
+	  public function getEmptyMarsrutaiList() {
+        $query = "  SELECT *
+                    FROM {$this->marsrutu_table} WHERE `fk_lektuvas_id_lektuvas` IS NULL";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+	  public function insertPlaneIntoMarsrutas($marsrutas, $lektuvas) {
+        $query = "UPDATE {$this->marsrutu_table} SET `fk_lektuvas_id_lektuvas` = {$lektuvas} WHERE `id_marsrutas` = {$marsrutas}";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
+
     
 
 }
