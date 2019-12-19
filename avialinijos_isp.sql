@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2019 at 12:58 AM
+-- Generation Time: Dec 19, 2019 at 02:01 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -20,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `avialinijos_isp`
+-- Database: `grupe`
 --
 
 -- --------------------------------------------------------
@@ -29,15 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `ataskaita`
 --
 
-DROP TABLE IF EXISTS `ataskaita`;
-CREATE TABLE IF NOT EXISTS `ataskaita` (
-  `id_ataskaita` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ataskaita` (
+  `id_ataskaita` int(11) NOT NULL,
   `data` date DEFAULT NULL,
   `suma` double DEFAULT NULL,
   `laikotarpis` int(11) DEFAULT NULL,
   `priezastis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `busena` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_ataskaita`)
+  `busena` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -46,13 +43,11 @@ CREATE TABLE IF NOT EXISTS `ataskaita` (
 -- Table structure for table `atlyginimas`
 --
 
-DROP TABLE IF EXISTS `atlyginimas`;
-CREATE TABLE IF NOT EXISTS `atlyginimas` (
-  `id_atlyginimas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `atlyginimas` (
+  `id_atlyginimas` int(11) NOT NULL,
   `data` date DEFAULT NULL,
-  `suma` double DEFAULT NULL,
-  PRIMARY KEY (`id_atlyginimas`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `suma` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `atlyginimas`
@@ -76,9 +71,8 @@ INSERT INTO `atlyginimas` (`id_atlyginimas`, `data`, `suma`) VALUES
 -- Table structure for table `bagazas`
 --
 
-DROP TABLE IF EXISTS `bagazas`;
-CREATE TABLE IF NOT EXISTS `bagazas` (
-  `id_bagazas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bagazas` (
+  `id_bagazas` int(11) NOT NULL,
   `ilgis` double DEFAULT NULL,
   `plotis` double DEFAULT NULL,
   `svoris` double DEFAULT NULL,
@@ -87,14 +81,8 @@ CREATE TABLE IF NOT EXISTS `bagazas` (
   `busena` tinyint(1) DEFAULT NULL,
   `fk_lektuvas_id_lektuvas` int(11) DEFAULT NULL,
   `fk_keleivis_id_keleivis` int(11) NOT NULL,
-  `fk_cekis_id_cekis` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_bagazas`),
-  KEY `registruoja_bagaza` (`fk_keleivis_id_keleivis`),
-  KEY `nustato_kaina` (`fk_cekis_id_cekis`),
-  KEY `fk_ypatybe` (`ypatybes`),
-  KEY `fk_busena` (`busena`),
-  KEY `fk_lektuvas_id_lektuvas` (`fk_lektuvas_id_lektuvas`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_cekis_id_cekis` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `bagazas`
@@ -110,16 +98,13 @@ INSERT INTO `bagazas` (`id_bagazas`, `ilgis`, `plotis`, `svoris`, `aukstis`, `yp
 -- Table structure for table `bilietas`
 --
 
-DROP TABLE IF EXISTS `bilietas`;
-CREATE TABLE IF NOT EXISTS `bilietas` (
-  `id_bilietas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bilietas` (
+  `id_bilietas` int(11) NOT NULL,
   `kaina` double DEFAULT NULL,
   `pirkimo_data` date DEFAULT NULL,
   `isvykimo_data` date DEFAULT NULL,
-  `fk_marsrutas_id_marsrutas` int(11) NOT NULL,
-  PRIMARY KEY (`id_bilietas`),
-  KEY `Priskirtas` (`fk_marsrutas_id_marsrutas`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_marsrutas_id_marsrutas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `bilietas`
@@ -141,12 +126,10 @@ INSERT INTO `bilietas` (`id_bilietas`, `kaina`, `pirkimo_data`, `isvykimo_data`,
 -- Table structure for table `busena`
 --
 
-DROP TABLE IF EXISTS `busena`;
-CREATE TABLE IF NOT EXISTS `busena` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `busena` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE `busena` (
+  `id` int(11) NOT NULL,
+  `busena` varchar(64) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `busena`
@@ -162,15 +145,12 @@ INSERT INTO `busena` (`id`, `busena`) VALUES
 -- Table structure for table `cekis`
 --
 
-DROP TABLE IF EXISTS `cekis`;
-CREATE TABLE IF NOT EXISTS `cekis` (
-  `id_cekis` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cekis` (
+  `id_cekis` int(11) NOT NULL,
   `kaina` double DEFAULT NULL,
   `laikas` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `fk_keleivis_id_keleivis` int(11) NOT NULL,
-  PRIMARY KEY (`id_cekis`),
-  KEY `fk_keleivis_id_keleivis_2` (`fk_keleivis_id_keleivis`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_keleivis_id_keleivis` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `cekis`
@@ -186,15 +166,13 @@ INSERT INTO `cekis` (`id_cekis`, `kaina`, `laikas`, `fk_keleivis_id_keleivis`) V
 -- Table structure for table `daiktas`
 --
 
-DROP TABLE IF EXISTS `daiktas`;
-CREATE TABLE IF NOT EXISTS `daiktas` (
-  `id_daiktas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `daiktas` (
+  `id_daiktas` int(11) NOT NULL,
   `pavadinimas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `kiekis` int(11) DEFAULT NULL,
   `kaina` double DEFAULT NULL,
-  `fk_oro_uostas` int(11) NOT NULL,
-  PRIMARY KEY (`id_daiktas`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_oro_uostas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `daiktas`
@@ -218,9 +196,8 @@ INSERT INTO `daiktas` (`id_daiktas`, `pavadinimas`, `kiekis`, `kaina`, `fk_oro_u
 -- Table structure for table `darbuotojas`
 --
 
-DROP TABLE IF EXISTS `darbuotojas`;
-CREATE TABLE IF NOT EXISTS `darbuotojas` (
-  `id_darbuotojas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `darbuotojas` (
+  `id_darbuotojas` int(11) NOT NULL,
   `role` int(10) NOT NULL,
   `vardas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pavarde` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -241,17 +218,8 @@ CREATE TABLE IF NOT EXISTS `darbuotojas` (
   `fk_nakvyne_id_nakvyne` int(11) DEFAULT NULL,
   `fk_kvitas_id_kvitas` int(11) DEFAULT NULL,
   `fk_atlyginimas_id_atlyginimas` int(11) DEFAULT NULL,
-  `fk_nuobauda_id_nuobauda1` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_darbuotojas`),
-  KEY `raso_zinute` (`fk_pokalbiu_kambarys_id_pokalbiu_kambarys`),
-  KEY `pateikia_darbuotojas` (`fk_ataskaita_id_ataskaita`),
-  KEY `registruoja` (`fk_oro_uostas_id_oro_uostas`),
-  KEY `patvirtina` (`fk_ataskaita_id_ataskaita1`),
-  KEY `priskiria` (`fk_nakvyne_id_nakvyne`),
-  KEY `atnesa` (`fk_kvitas_id_kvitas`),
-  KEY `gauna` (`fk_atlyginimas_id_atlyginimas`),
-  KEY `skiria_darbuotojas` (`fk_nuobauda_id_nuobauda1`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_nuobauda_id_nuobauda1` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `darbuotojas`
@@ -273,15 +241,13 @@ INSERT INTO `darbuotojas` (`id_darbuotojas`, `role`, `vardas`, `pavarde`, `gimim
 -- Table structure for table `keleivis`
 --
 
-DROP TABLE IF EXISTS `keleivis`;
-CREATE TABLE IF NOT EXISTS `keleivis` (
-  `id_keleivis` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `keleivis` (
+  `id_keleivis` int(11) NOT NULL,
   `vardas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pavarde` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `laikas` timestamp NULL DEFAULT NULL,
-  `ivykis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_keleivis`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `ivykis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `keleivis`
@@ -293,16 +259,34 @@ INSERT INTO `keleivis` (`id_keleivis`, `vardas`, `pavarde`, `laikas`, `ivykis`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kreditai`
+--
+
+CREATE TABLE `kreditai` (
+  `id` int(20) NOT NULL,
+  `kreditu_kaina` int(20) NOT NULL,
+  `kreditas` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kreditai`
+--
+
+INSERT INTO `kreditai` (`id`, `kreditu_kaina`, `kreditas`) VALUES
+(1, 5, 'maistas'),
+(2, 10, 'parkas');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kvitas`
 --
 
-DROP TABLE IF EXISTS `kvitas`;
-CREATE TABLE IF NOT EXISTS `kvitas` (
-  `id_kvitas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kvitas` (
+  `id_kvitas` int(11) NOT NULL,
   `laikas` timestamp NULL DEFAULT NULL,
-  `suma` double DEFAULT NULL,
-  PRIMARY KEY (`id_kvitas`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `suma` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kvitas`
@@ -327,19 +311,16 @@ INSERT INTO `kvitas` (`id_kvitas`, `laikas`, `suma`) VALUES
 -- Table structure for table `lektuvas`
 --
 
-DROP TABLE IF EXISTS `lektuvas`;
-CREATE TABLE IF NOT EXISTS `lektuvas` (
-  `id_lektuvas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lektuvas` (
+  `id_lektuvas` int(11) NOT NULL,
   `max_kuras` int(11) DEFAULT NULL,
   `kuras` int(11) DEFAULT NULL,
   `bagazo_talpa` int(11) DEFAULT NULL,
   `max_keleiviai` int(11) DEFAULT NULL,
   `modelis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `marke` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fk_remontas_id_remontas` int(11) NOT NULL,
-  PRIMARY KEY (`id_lektuvas`),
-  KEY `atliktas` (`fk_remontas_id_remontas`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_remontas_id_remontas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `lektuvas`
@@ -373,20 +354,16 @@ INSERT INTO `lektuvas` (`id_lektuvas`, `max_kuras`, `kuras`, `bagazo_talpa`, `ma
 -- Table structure for table `marsrutas`
 --
 
-DROP TABLE IF EXISTS `marsrutas`;
-CREATE TABLE IF NOT EXISTS `marsrutas` (
-  `id_marsrutas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `marsrutas` (
+  `id_marsrutas` int(11) NOT NULL,
   `isvykimo_vieta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `atvykimo_vieta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pilotas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `busena` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `keleiviu_skaicius` int(11) DEFAULT NULL,
   `fk_lektuvas_id_lektuvas` int(11) DEFAULT NULL,
-  `fk_oro_uostas_id_oro_uostas` int(11) NOT NULL,
-  PRIMARY KEY (`id_marsrutas`),
-  UNIQUE KEY `fk_oro_uostas_id_oro_uostas` (`fk_oro_uostas_id_oro_uostas`),
-  UNIQUE KEY `fk_lektuvas_id_lektuvas` (`fk_lektuvas_id_lektuvas`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_oro_uostas_id_oro_uostas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `marsrutas`
@@ -408,13 +385,11 @@ INSERT INTO `marsrutas` (`id_marsrutas`, `isvykimo_vieta`, `atvykimo_vieta`, `pi
 -- Table structure for table `nakvyne`
 --
 
-DROP TABLE IF EXISTS `nakvyne`;
-CREATE TABLE IF NOT EXISTS `nakvyne` (
-  `id_nakvyne` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `nakvyne` (
+  `id_nakvyne` int(11) NOT NULL,
   `data` date DEFAULT NULL,
-  `vieta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_nakvyne`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `vieta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nakvyne`
@@ -440,13 +415,11 @@ INSERT INTO `nakvyne` (`id_nakvyne`, `data`, `vieta`) VALUES
 -- Table structure for table `nuobauda`
 --
 
-DROP TABLE IF EXISTS `nuobauda`;
-CREATE TABLE IF NOT EXISTS `nuobauda` (
-  `id_nuobauda` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `nuobauda` (
+  `id_nuobauda` int(11) NOT NULL,
   `data` date DEFAULT NULL,
-  `priezastis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_nuobauda`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `priezastis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nuobauda`
@@ -466,14 +439,11 @@ INSERT INTO `nuobauda` (`id_nuobauda`, `data`, `priezastis`) VALUES
 -- Table structure for table `nuomininkas`
 --
 
-DROP TABLE IF EXISTS `nuomininkas`;
-CREATE TABLE IF NOT EXISTS `nuomininkas` (
-  `id_nuomininkas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `nuomininkas` (
+  `id_nuomininkas` int(11) NOT NULL,
   `pavadinimas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bustines_adresas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fk_patalpa_id_patalpa` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_nuomininkas`),
-  KEY `nuomojama` (`fk_patalpa_id_patalpa`)
+  `fk_patalpa_id_patalpa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -482,16 +452,14 @@ CREATE TABLE IF NOT EXISTS `nuomininkas` (
 -- Table structure for table `oro_uostas`
 --
 
-DROP TABLE IF EXISTS `oro_uostas`;
-CREATE TABLE IF NOT EXISTS `oro_uostas` (
-  `id_oro_uostas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oro_uostas` (
+  `id_oro_uostas` int(11) NOT NULL,
   `salis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `miestas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pavadinimas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `koordinates` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `kodas` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_oro_uostas`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `kodas` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `oro_uostas`
@@ -513,16 +481,14 @@ INSERT INTO `oro_uostas` (`id_oro_uostas`, `salis`, `miestas`, `pavadinimas`, `k
 -- Table structure for table `patalpa`
 --
 
-DROP TABLE IF EXISTS `patalpa`;
-CREATE TABLE IF NOT EXISTS `patalpa` (
-  `id_patalpa` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `patalpa` (
+  `id_patalpa` int(11) NOT NULL,
   `pavadinimas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `plotas` double DEFAULT NULL,
   `kaina` double DEFAULT NULL,
   `fk_nuomotojas` int(11) DEFAULT NULL,
-  `fk_oro_uostas` int(11) NOT NULL,
-  PRIMARY KEY (`id_patalpa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_oro_uostas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `patalpa`
@@ -541,14 +507,12 @@ INSERT INTO `patalpa` (`id_patalpa`, `pavadinimas`, `plotas`, `kaina`, `fk_nuomo
 -- Table structure for table `pokalbiu_kambarys`
 --
 
-DROP TABLE IF EXISTS `pokalbiu_kambarys`;
-CREATE TABLE IF NOT EXISTS `pokalbiu_kambarys` (
-  `id_pokalbiu_kambarys` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pokalbiu_kambarys` (
+  `id_pokalbiu_kambarys` int(11) NOT NULL,
   `darbuotojas` int(11) NOT NULL,
   `laikas` timestamp NULL DEFAULT NULL,
-  `tekstas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_pokalbiu_kambarys`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tekstas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `pokalbiu_kambarys`
@@ -566,15 +530,13 @@ INSERT INTO `pokalbiu_kambarys` (`id_pokalbiu_kambarys`, `darbuotojas`, `laikas`
 -- Table structure for table `praejimo_kontrole`
 --
 
-DROP TABLE IF EXISTS `praejimo_kontrole`;
-CREATE TABLE IF NOT EXISTS `praejimo_kontrole` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `praejimo_kontrole` (
+  `id` int(11) NOT NULL,
   `keleivis` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `oro_uostas` int(11) NOT NULL,
   `vartai` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `laikas` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `laikas` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `praejimo_kontrole`
@@ -593,15 +555,13 @@ INSERT INTO `praejimo_kontrole` (`id`, `keleivis`, `oro_uostas`, `vartai`, `laik
 -- Table structure for table `remontas`
 --
 
-DROP TABLE IF EXISTS `remontas`;
-CREATE TABLE IF NOT EXISTS `remontas` (
-  `id_remontas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `remontas` (
+  `id_remontas` int(11) NOT NULL,
   `registravimo_data` date DEFAULT NULL,
   `gedimo_aprasas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remonto_aprasas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `remonto_data` date DEFAULT NULL,
-  PRIMARY KEY (`id_remontas`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `remonto_data` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `remontas`
@@ -635,11 +595,9 @@ INSERT INTO `remontas` (`id_remontas`, `registravimo_data`, `gedimo_aprasas`, `r
 -- Table structure for table `skiria`
 --
 
-DROP TABLE IF EXISTS `skiria`;
-CREATE TABLE IF NOT EXISTS `skiria` (
+CREATE TABLE `skiria` (
   `fk_atlyginimas_id_atlyginimas` int(11) NOT NULL,
-  `fk_darbuotojas_id_darbuotojas` int(11) NOT NULL,
-  PRIMARY KEY (`fk_atlyginimas_id_atlyginimas`,`fk_darbuotojas_id_darbuotojas`)
+  `fk_darbuotojas_id_darbuotojas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -659,18 +617,13 @@ INSERT INTO `skiria` (`fk_atlyginimas_id_atlyginimas`, `fk_darbuotojas_id_darbuo
 -- Table structure for table `skundas`
 --
 
-DROP TABLE IF EXISTS `skundas`;
-CREATE TABLE IF NOT EXISTS `skundas` (
-  `id_skundas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `skundas` (
+  `id_skundas` int(11) NOT NULL,
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `busena` int(11) DEFAULT NULL,
   `fk_darbuotojas_id_darbuotojas` int(11) NOT NULL,
-  `fk_keleivis_id_keleivis` int(11) NOT NULL,
-  PRIMARY KEY (`id_skundas`),
-  KEY `priima` (`fk_darbuotojas_id_darbuotojas`),
-  KEY `pateikia_skunda` (`fk_keleivis_id_keleivis`),
-  KEY `fk_busena_id` (`busena`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_keleivis_id_keleivis` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `skundas`
@@ -689,13 +642,10 @@ INSERT INTO `skundas` (`id_skundas`, `data`, `busena`, `fk_darbuotojas_id_darbuo
 -- Table structure for table `takas`
 --
 
-DROP TABLE IF EXISTS `takas`;
-CREATE TABLE IF NOT EXISTS `takas` (
-  `id_takas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `takas` (
+  `id_takas` int(11) NOT NULL,
   `kodas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fk_tvarkarascio_irasas_id_tvarkarascio_irasas` int(11) NOT NULL,
-  PRIMARY KEY (`id_takas`),
-  KEY `priskirtas_takas` (`fk_tvarkarascio_irasas_id_tvarkarascio_irasas`)
+  `fk_tvarkarascio_irasas_id_tvarkarascio_irasas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -704,11 +654,9 @@ CREATE TABLE IF NOT EXISTS `takas` (
 -- Table structure for table `tikrina`
 --
 
-DROP TABLE IF EXISTS `tikrina`;
-CREATE TABLE IF NOT EXISTS `tikrina` (
+CREATE TABLE `tikrina` (
   `fk_keleivis_id_keleivis` int(11) NOT NULL,
-  `fk_darbuotojas_id_darbuotojas` int(11) NOT NULL,
-  PRIMARY KEY (`fk_keleivis_id_keleivis`,`fk_darbuotojas_id_darbuotojas`)
+  `fk_darbuotojas_id_darbuotojas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -717,13 +665,11 @@ CREATE TABLE IF NOT EXISTS `tikrina` (
 -- Table structure for table `tvarkarascio_irasas`
 --
 
-DROP TABLE IF EXISTS `tvarkarascio_irasas`;
-CREATE TABLE IF NOT EXISTS `tvarkarascio_irasas` (
-  `id_tvarkarascio_irasas` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tvarkarascio_irasas` (
+  `id_tvarkarascio_irasas` int(11) NOT NULL,
   `laikas` timestamp NULL DEFAULT NULL,
-  `fk_marsrutas` int(11) NOT NULL,
-  PRIMARY KEY (`id_tvarkarascio_irasas`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fk_marsrutas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tvarkarascio_irasas`
@@ -745,13 +691,11 @@ INSERT INTO `tvarkarascio_irasas` (`id_tvarkarascio_irasas`, `laikas`, `fk_marsr
 -- Table structure for table `ypatybes`
 --
 
-DROP TABLE IF EXISTS `ypatybes`;
-CREATE TABLE IF NOT EXISTS `ypatybes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ypatybes` (
+  `id` int(11) NOT NULL,
   `ypatybe` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `koeficientas` decimal(11,4) NOT NULL DEFAULT '1.0000',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `koeficientas` decimal(11,4) NOT NULL DEFAULT '1.0000'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `ypatybes`
@@ -762,6 +706,349 @@ INSERT INTO `ypatybes` (`id`, `ypatybe`, `koeficientas`) VALUES
 (1, 'sumaPerCm', '0.0010'),
 (2, 'trapus', '1.5000'),
 (3, 'iprastas', '1.0000');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ataskaita`
+--
+ALTER TABLE `ataskaita`
+  ADD PRIMARY KEY (`id_ataskaita`);
+
+--
+-- Indexes for table `atlyginimas`
+--
+ALTER TABLE `atlyginimas`
+  ADD PRIMARY KEY (`id_atlyginimas`);
+
+--
+-- Indexes for table `bagazas`
+--
+ALTER TABLE `bagazas`
+  ADD PRIMARY KEY (`id_bagazas`),
+  ADD KEY `registruoja_bagaza` (`fk_keleivis_id_keleivis`),
+  ADD KEY `nustato_kaina` (`fk_cekis_id_cekis`),
+  ADD KEY `fk_ypatybe` (`ypatybes`),
+  ADD KEY `fk_busena` (`busena`),
+  ADD KEY `fk_lektuvas_id_lektuvas` (`fk_lektuvas_id_lektuvas`) USING BTREE;
+
+--
+-- Indexes for table `bilietas`
+--
+ALTER TABLE `bilietas`
+  ADD PRIMARY KEY (`id_bilietas`),
+  ADD KEY `Priskirtas` (`fk_marsrutas_id_marsrutas`);
+
+--
+-- Indexes for table `busena`
+--
+ALTER TABLE `busena`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cekis`
+--
+ALTER TABLE `cekis`
+  ADD PRIMARY KEY (`id_cekis`),
+  ADD KEY `fk_keleivis_id_keleivis_2` (`fk_keleivis_id_keleivis`);
+
+--
+-- Indexes for table `daiktas`
+--
+ALTER TABLE `daiktas`
+  ADD PRIMARY KEY (`id_daiktas`);
+
+--
+-- Indexes for table `darbuotojas`
+--
+ALTER TABLE `darbuotojas`
+  ADD PRIMARY KEY (`id_darbuotojas`),
+  ADD KEY `raso_zinute` (`fk_pokalbiu_kambarys_id_pokalbiu_kambarys`),
+  ADD KEY `pateikia_darbuotojas` (`fk_ataskaita_id_ataskaita`),
+  ADD KEY `registruoja` (`fk_oro_uostas_id_oro_uostas`),
+  ADD KEY `patvirtina` (`fk_ataskaita_id_ataskaita1`),
+  ADD KEY `priskiria` (`fk_nakvyne_id_nakvyne`),
+  ADD KEY `atnesa` (`fk_kvitas_id_kvitas`),
+  ADD KEY `gauna` (`fk_atlyginimas_id_atlyginimas`),
+  ADD KEY `skiria_darbuotojas` (`fk_nuobauda_id_nuobauda1`);
+
+--
+-- Indexes for table `keleivis`
+--
+ALTER TABLE `keleivis`
+  ADD PRIMARY KEY (`id_keleivis`);
+
+--
+-- Indexes for table `kreditai`
+--
+ALTER TABLE `kreditai`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kvitas`
+--
+ALTER TABLE `kvitas`
+  ADD PRIMARY KEY (`id_kvitas`);
+
+--
+-- Indexes for table `lektuvas`
+--
+ALTER TABLE `lektuvas`
+  ADD PRIMARY KEY (`id_lektuvas`),
+  ADD KEY `atliktas` (`fk_remontas_id_remontas`);
+
+--
+-- Indexes for table `marsrutas`
+--
+ALTER TABLE `marsrutas`
+  ADD PRIMARY KEY (`id_marsrutas`),
+  ADD UNIQUE KEY `fk_oro_uostas_id_oro_uostas` (`fk_oro_uostas_id_oro_uostas`),
+  ADD UNIQUE KEY `fk_lektuvas_id_lektuvas` (`fk_lektuvas_id_lektuvas`);
+
+--
+-- Indexes for table `nakvyne`
+--
+ALTER TABLE `nakvyne`
+  ADD PRIMARY KEY (`id_nakvyne`);
+
+--
+-- Indexes for table `nuobauda`
+--
+ALTER TABLE `nuobauda`
+  ADD PRIMARY KEY (`id_nuobauda`);
+
+--
+-- Indexes for table `nuomininkas`
+--
+ALTER TABLE `nuomininkas`
+  ADD PRIMARY KEY (`id_nuomininkas`),
+  ADD KEY `nuomojama` (`fk_patalpa_id_patalpa`);
+
+--
+-- Indexes for table `oro_uostas`
+--
+ALTER TABLE `oro_uostas`
+  ADD PRIMARY KEY (`id_oro_uostas`);
+
+--
+-- Indexes for table `patalpa`
+--
+ALTER TABLE `patalpa`
+  ADD PRIMARY KEY (`id_patalpa`);
+
+--
+-- Indexes for table `pokalbiu_kambarys`
+--
+ALTER TABLE `pokalbiu_kambarys`
+  ADD PRIMARY KEY (`id_pokalbiu_kambarys`);
+
+--
+-- Indexes for table `praejimo_kontrole`
+--
+ALTER TABLE `praejimo_kontrole`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `remontas`
+--
+ALTER TABLE `remontas`
+  ADD PRIMARY KEY (`id_remontas`);
+
+--
+-- Indexes for table `skiria`
+--
+ALTER TABLE `skiria`
+  ADD PRIMARY KEY (`fk_atlyginimas_id_atlyginimas`,`fk_darbuotojas_id_darbuotojas`);
+
+--
+-- Indexes for table `skundas`
+--
+ALTER TABLE `skundas`
+  ADD PRIMARY KEY (`id_skundas`),
+  ADD KEY `priima` (`fk_darbuotojas_id_darbuotojas`),
+  ADD KEY `pateikia_skunda` (`fk_keleivis_id_keleivis`),
+  ADD KEY `fk_busena_id` (`busena`);
+
+--
+-- Indexes for table `takas`
+--
+ALTER TABLE `takas`
+  ADD PRIMARY KEY (`id_takas`),
+  ADD KEY `priskirtas_takas` (`fk_tvarkarascio_irasas_id_tvarkarascio_irasas`);
+
+--
+-- Indexes for table `tikrina`
+--
+ALTER TABLE `tikrina`
+  ADD PRIMARY KEY (`fk_keleivis_id_keleivis`,`fk_darbuotojas_id_darbuotojas`);
+
+--
+-- Indexes for table `tvarkarascio_irasas`
+--
+ALTER TABLE `tvarkarascio_irasas`
+  ADD PRIMARY KEY (`id_tvarkarascio_irasas`);
+
+--
+-- Indexes for table `ypatybes`
+--
+ALTER TABLE `ypatybes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `ataskaita`
+--
+ALTER TABLE `ataskaita`
+  MODIFY `id_ataskaita` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `atlyginimas`
+--
+ALTER TABLE `atlyginimas`
+  MODIFY `id_atlyginimas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `bagazas`
+--
+ALTER TABLE `bagazas`
+  MODIFY `id_bagazas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `bilietas`
+--
+ALTER TABLE `bilietas`
+  MODIFY `id_bilietas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `busena`
+--
+ALTER TABLE `busena`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cekis`
+--
+ALTER TABLE `cekis`
+  MODIFY `id_cekis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `daiktas`
+--
+ALTER TABLE `daiktas`
+  MODIFY `id_daiktas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `darbuotojas`
+--
+ALTER TABLE `darbuotojas`
+  MODIFY `id_darbuotojas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `keleivis`
+--
+ALTER TABLE `keleivis`
+  MODIFY `id_keleivis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `kreditai`
+--
+ALTER TABLE `kreditai`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `kvitas`
+--
+ALTER TABLE `kvitas`
+  MODIFY `id_kvitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `lektuvas`
+--
+ALTER TABLE `lektuvas`
+  MODIFY `id_lektuvas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `marsrutas`
+--
+ALTER TABLE `marsrutas`
+  MODIFY `id_marsrutas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `nakvyne`
+--
+ALTER TABLE `nakvyne`
+  MODIFY `id_nakvyne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `nuobauda`
+--
+ALTER TABLE `nuobauda`
+  MODIFY `id_nuobauda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `nuomininkas`
+--
+ALTER TABLE `nuomininkas`
+  MODIFY `id_nuomininkas` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `oro_uostas`
+--
+ALTER TABLE `oro_uostas`
+  MODIFY `id_oro_uostas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
+--
+-- AUTO_INCREMENT for table `patalpa`
+--
+ALTER TABLE `patalpa`
+  MODIFY `id_patalpa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `pokalbiu_kambarys`
+--
+ALTER TABLE `pokalbiu_kambarys`
+  MODIFY `id_pokalbiu_kambarys` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `praejimo_kontrole`
+--
+ALTER TABLE `praejimo_kontrole`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `remontas`
+--
+ALTER TABLE `remontas`
+  MODIFY `id_remontas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `skundas`
+--
+ALTER TABLE `skundas`
+  MODIFY `id_skundas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `takas`
+--
+ALTER TABLE `takas`
+  MODIFY `id_takas` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tvarkarascio_irasas`
+--
+ALTER TABLE `tvarkarascio_irasas`
+  MODIFY `id_tvarkarascio_irasas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `ypatybes`
+--
+ALTER TABLE `ypatybes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -789,7 +1076,6 @@ ALTER TABLE `skundas`
   ADD CONSTRAINT `fk_busena_id` FOREIGN KEY (`busena`) REFERENCES `busena` (`id`),
   ADD CONSTRAINT `fk_darbuotojas` FOREIGN KEY (`fk_darbuotojas_id_darbuotojas`) REFERENCES `darbuotojas` (`id_darbuotojas`),
   ADD CONSTRAINT `fk_keleivis_fk_id` FOREIGN KEY (`fk_keleivis_id_keleivis`) REFERENCES `keleivis` (`id_keleivis`);
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

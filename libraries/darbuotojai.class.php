@@ -1,8 +1,69 @@
 <?php
 
 class darbuotojai {
-    private $darbuotoju_table = 'darbuotojas';
 
+	private $darbuotoju_table = 'darbuotojas';
+
+	public function getDarbuotojaiList() {
+        $query = "  SELECT *
+                    FROM {$this->darbuotoju_table}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+	public function newDarbuotojas($vardas, $pavarde, $gim, $as_ko, $tel,
+	$e_p, $mie, $ban, $sas, $kre, $pass) {
+        $query = "	INSERT INTO {$this->darbuotoju_table} (vardas, pavarde,
+		gimimo_data, asmens_kodas, telefonas, e_pastas, miestas, bankas, saskaita,
+		kreditai, slaptazodis)
+					VALUES ('{$vardas}', '{$pavarde}', '{$gim}', '{$as_ko}', '{$tel}',
+					'{$e_p}', '{$mie}', '{$ban}', '{$sas}', '{$kre}', '{$pass}')";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
+	
+	public function updateNuobauda($darbuotojas, $nuobauda) {
+        $query = "UPDATE {$this->darbuotoju_table} 
+		SET `fk_nuobauda_id_nuobauda1` = {$nuobauda} 
+		WHERE `id_darbuotojas` = {$darbuotojas}";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
+	public function kredituNuskaiciavimas($darbuotojas, $kreditai) {	
+        $query = "UPDATE {$this->darbuotoju_table} 
+		SET `kreditai` = {$kreditai[0]['kreditai']}
+		WHERE `id_darbuotojas` = {$darbuotojas}";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
+	
+	public function PridetiNakvyne($darbuotojas, $nakvyne) {
+        $query = "UPDATE {$this->darbuotoju_table} 
+		SET `fk_nakvyne_id_nakvyne` = {$nakvyne} 
+		WHERE `id_darbuotojas` = {$darbuotojas}";
+        $data = mysql::query($query);
+
+        if($data) return true;
+
+        return false;
+    }
+	public function getDarbuotojasByID($id) {
+        $query = "  SELECT *
+                    FROM {$this->darbuotoju_table} WHERE `id_darbuotojas` = {$id}";
+        $data = mysql::select($query);
+
+        return $data;
+	}
+	
 	public function getAll() {
 		$query = "	SELECT
 						*,
